@@ -24,7 +24,7 @@ Module.register("MMM-Lyrion", {
     },
 
     getStyles: function() {
-        return ["MMM-Lyrion.css"];
+        return ["MMM-Lyrion.css", "font-aweseome.css"];
     },
 
     getDom: function() {
@@ -35,7 +35,7 @@ Module.register("MMM-Lyrion", {
     var playingPlayers = this.players.filter(player => player.isPlaying && player.track);
 
     if (playingPlayers.length === 0) {
-        wrapper.innerHTML = "Kein aktiver Player";
+        wrapper.innerHTML = "Kein aktiver Player <i class='fa fa-music'></i>";
         return wrapper;
     }
 
@@ -45,7 +45,7 @@ Module.register("MMM-Lyrion", {
 
         var header = document.createElement("div");
         header.className = "player-header";
-        header.innerHTML = `<b>${player.name}</b>  ▶️`;
+		header.innerHTML = `<b>${player.name}</b>  <i class="fa fa-play"></i>`;
         playerDiv.appendChild(header);
 
         var trackInfo = document.createElement("div");
