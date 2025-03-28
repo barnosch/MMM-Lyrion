@@ -15,4 +15,4 @@ Add to your config.js\
       }\
     },\
 
-![Playing](https://github.com/user-attachments/assets/2d642613-5fa9-4542-a4ea-f9fa233ba08b)
+![Playing](https://github.com/user-attachments/assets/54da1dce-5375-43bc-b729-1830d7d1cf82)
