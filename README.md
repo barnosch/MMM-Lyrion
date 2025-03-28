@@ -8,7 +8,7 @@ Add to your config.js\
 {\
     disabled: false,\
     module: "MMM-Lyrion",\
-    position: "bottom_right",\ 
+    position: "bottom_right",<br>
     config: {\
         updateInterval: 30000,                // optional, Standard: 60000ms\
         lmsServer: "http://10.30.10.11:9000"  // IP:9000\
