@@ -1,0 +1,9 @@
+.player-header b {
+  color: #ffffff;   
+}
+
+/* Play-Icon */
+.player-header .fa-play {
+    margin-left: 8px;
+    color: #00ff00; 	
+}
