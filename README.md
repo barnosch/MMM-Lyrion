@@ -15,9 +15,9 @@ Add to your config.js\
       }\
     },\
 
-Playing
+Playing\
 ![Playing](https://github.com/user-attachments/assets/017ef5e2-4557-4e63-af2c-e1c139dd2f2a)
 
-Stopped
+Stopped\
 ![paused](https://github.com/user-attachments/assets/4d6792fe-e2d9-4fd4-8c8b-c4f87488b4ae)
 
