@@ -1,19 +1,28 @@
-Clone to modules folder<br>
-https://github.com/barnosch/MMM-Lyrion.git<br>
+## Installation
 
-cd MMM-Lyrion<br>
-npm install  
+Navigate to your MagicMirror modules directory and clone the repository:
 
-Add to your config.js\
-{\
-    disabled: false,\
-    module: "MMM-Lyrion",\
-    position: "bottom_right",<br>
-    config: {\
-        updateInterval: 30000,                // optional, Standard: 60000ms\
-        lmsServer: "http://10.30.10.11:9000"  // IP:9000\
-      }\
-    },\
+```bash
+cd ~/MagicMirror/modules
+git clone https://github.com/barnosch/MMM-Lyrion.git
+cd MMM-Lyrion
+npm install
+```
+
+## Configuration
+
+To enable the module, add it to the config.js file in your MagicMirror setup:
+
+```bash
+{
+    module: "MMM-MMM-Lyrion",
+    disabled: false,
+    position: "bottom_right",                     // Adjust as needed
+    config: {
+        lmsServer: "http://10.30.10.11:9000"      // IPofyourserver:9000
+    }
+}
+```
 
 Playing\
 ![Playing](https://github.com/user-attachments/assets/017ef5e2-4557-4e63-af2c-e1c139dd2f2a)
