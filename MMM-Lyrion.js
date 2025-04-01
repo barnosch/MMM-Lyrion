@@ -11,6 +11,13 @@ Module.register("MMM-Lyrion", {
             this.getPlayers();
         }, this.config.updateInterval);
     },
+    
+    getTranslations: function () {
+    return {
+      en: "translations/en.json",
+      de: "translations/de.json",
+      };
+    },
 
     getPlayers: function() {
         this.sendSocketNotification("GET_PLAYERS_AND_TRACKS", this.config.lmsServer);
@@ -24,7 +31,7 @@ Module.register("MMM-Lyrion", {
     },
 
     getStyles: function() {
-        return ["MMM-Lyrion.css", "font-aweseome.css"];
+        return ["MMM-Lyrion.css", "font-awesome.css"];
     },
 
     getDom: function() {
@@ -35,7 +42,8 @@ Module.register("MMM-Lyrion", {
     var playingPlayers = this.players.filter(player => player.isPlaying && player.track);
 
     if (playingPlayers.length === 0) {
-        wrapper.innerHTML = "Kein aktiver Player <i class='fa fa-music'></i>";
+        //wrapper.innerHTML = "Kein aktiver Player <i class='fa fa-music'></i>"; //Original
+        wrapper.innerHTML = this.translate("noplayer") + "  <i class='fa fa-music'></i>";
         return wrapper;
     }
 
@@ -45,7 +53,7 @@ Module.register("MMM-Lyrion", {
 
         var header = document.createElement("div");
         header.className = "player-header";
-		header.innerHTML = `<b>${player.name}</b>  <i class="fa fa-play"></i>`;
+        header.innerHTML = `<b>${player.name}</b>  <i class="fa fa-play"></i>`;
         playerDiv.appendChild(header);
 
         var trackInfo = document.createElement("div");

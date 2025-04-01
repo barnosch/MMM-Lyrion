@@ -3,7 +3,7 @@ const axios = require("axios");
 
 module.exports = NodeHelper.create({
     start: function() {
-        console.log("MMM-Lyrion helper gestartet...");
+        console.log("MMM-Lyrion helper start...");
     },
 
     socketNotificationReceived: function(notification, payload) {
@@ -37,8 +37,10 @@ module.exports = NodeHelper.create({
                     const status = statusResponse.data.result || {};
                     const trackInfo = (status.playlist_loop && status.playlist_loop.length > 0)
                         ? {
-                            title: status.playlist_loop[0].title || "Unbekannter Titel",
-                            artist: status.playlist_loop[0].artist || "Unbekannter Interpret"
+                            //title: status.playlist_loop[0].title || "unknown titel",
+                            //artist: status.playlist_loop[0].artist || "unknown artist"
+                            title: status.playlist_loop[0].title || "",
+                            artist: status.playlist_loop[0].artist || ""
                         }
                         : null;
 
@@ -49,7 +51,7 @@ module.exports = NodeHelper.create({
                         track: trackInfo
                     };
                 } catch (innerError) {
-                    console.error(`Fehler beim Abrufen des Status für Player ${player.name}:`, innerError);
+                    console.error(`error while fetching status for player ${player.name}:`, innerError);
                     return {
                         name: player.name,
                         id: player.playerid,
@@ -62,7 +64,7 @@ module.exports = NodeHelper.create({
             const playersDetails = await Promise.all(playerDetailsPromises);
             this.sendSocketNotification("PLAYERS_TRACKS_RESULT", playersDetails);
         } catch (error) {
-            console.error("Fehler beim Abrufen der Player und Tracks: ", error);
+            console.error("error while fetching the player and tracks: ", error);
             this.sendSocketNotification("PLAYERS_TRACKS_RESULT", []);
         }
     }
