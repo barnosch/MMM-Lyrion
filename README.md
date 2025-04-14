@@ -15,7 +15,7 @@ To enable the module, add it to the config.js file in your MagicMirror setup:
 
 ```bash
 {
-    module: "MMM-MMM-Lyrion",
+    module: "MMM-Lyrion",
     disabled: false,
     position: "bottom_right",                     // Adjust as needed
     config: {
