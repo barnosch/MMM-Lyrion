@@ -1,12 +1,13 @@
 {
-  "name": "mmm-lyrion",
+  "name": "MMM-Lyrion",
   "version": "1.0.0",
   "main": "MMM-Lyrion.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": ""
+  "keywords": ["Magig Mirror",
+              "Music Server",
+              "Lyrion Server",
+              "LMS",
+  ],
+  "author": "barnosch (https://github.com/barnosch)",
+  "license": "MIT",
+  "description": "A module for MagicMirror² to show active players and song from a local Logitech (Lyrion) Media Server"
 }
