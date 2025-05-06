@@ -2,10 +2,11 @@
   "name": "MMM-Lyrion",
   "version": "1.0.0",
   "main": "MMM-Lyrion.js",
-  "keywords": ["Magig Mirror",
-              "Music Server",
-              "Lyrion Server",
-              "LMS"
+  "repository": "https://github.com/barnosch/MMM-Lyrion",
+  "keywords": ["Lyrion Music Server",
+              "Logitech Media Server",
+              "LMS",
+              "Squeezebox"
   ],
   "author": "barnosch (https://github.com/barnosch)",
   "license": "MIT",
