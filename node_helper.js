@@ -2,14 +2,13 @@ const NodeHelper = require("node_helper");
 const axios = require("axios");
 
 module.exports = NodeHelper.create({
-    start: function () {
-        console.log("MMM-Lyrion helper started...");
+    start: function() {
+        console.log("MMM-Lyrion helper start...");
     },
 
-    socketNotificationReceived: function (notification, payload) {
+    socketNotificationReceived: function(notification, payload) {
         if (notification === "GET_PLAYERS_AND_TRACKS") {
-            const lmsServer = payload; // payload ist die Server-URL
-            this.getPlayersAndTracks(lmsServer);
+            this.getPlayersAndTracks(payload);
         }
     },
 
@@ -17,6 +16,7 @@ module.exports = NodeHelper.create({
         const url = `${lmsServer}/jsonrpc.js`;
 
         try {
+            // Spieler abrufen
             const playersResponse = await axios.post(url, {
                 id: 1,
                 method: "slim.request",
@@ -25,7 +25,8 @@ module.exports = NodeHelper.create({
 
             const players = playersResponse.data.result.players_loop || [];
 
-            const playerDetailsPromises = players.map(async (player) => {
+            // Details zu allen Playern abrufen
+            const playerDetailsPromises = players.map(async player => {
                 try {
                     const statusResponse = await axios.post(url, {
                         id: 1,
@@ -34,20 +35,14 @@ module.exports = NodeHelper.create({
                     });
 
                     const status = statusResponse.data.result || {};
-                    const playlist = status.playlist_loop || [];
-
-                    let trackInfo = null;
-
-                    if (playlist.length > 0) {
-                        const track = playlist[0];
-                        const trackId = track.id || null;
-
-                        trackInfo = {
-                            title: track.title || "",
-                            artist: track.artist || "",
-                            cover: trackId ? `${lmsServer}/music/${trackId}/cover.jpg` : null
-                        };
-                    }
+                    const trackInfo = (status.playlist_loop && status.playlist_loop.length > 0)
+                        ? {
+                            //title: status.playlist_loop[0].title || "unknown titel",
+                            //artist: status.playlist_loop[0].artist || "unknown artist"
+                            title: status.playlist_loop[0].title || "",
+                            artist: status.playlist_loop[0].artist || ""
+                        }
+                        : null;
 
                     return {
                         name: player.name,
@@ -56,11 +51,11 @@ module.exports = NodeHelper.create({
                         track: trackInfo
                     };
                 } catch (innerError) {
-                    console.error(`Fehler beim Abrufen des Status für Player ${player.name}:`, innerError);
+                    console.error(`error while fetching status for player ${player.name}:`, innerError);
                     return {
                         name: player.name,
                         id: player.playerid,
-                        isPlaying: false,
+                        isPlaying: player.isplaying === 1,
                         track: null
                     };
                 }
@@ -69,7 +64,7 @@ module.exports = NodeHelper.create({
             const playersDetails = await Promise.all(playerDetailsPromises);
             this.sendSocketNotification("PLAYERS_TRACKS_RESULT", playersDetails);
         } catch (error) {
-            console.error("Fehler beim Abrufen der Player und Tracks:", error);
+            console.error("error while fetching the player and tracks: ", error);
             this.sendSocketNotification("PLAYERS_TRACKS_RESULT", []);
         }
     }
